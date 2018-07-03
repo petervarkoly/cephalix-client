@@ -25,6 +25,7 @@ Url:		http://www.cephalix.eu/
 Group:		Productivity/
 Source:		%{name}.tar.bz2
 PreReq:		oss-base
+PreReq:		apache2
 BuildRequires:  rsync
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
