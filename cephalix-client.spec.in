@@ -45,6 +45,6 @@ make install DESTDIR=%{buildroot} %{?_smp_mflags}
 
 %files
 %defattr(-,root,root)
-%config(noreplace) /etc/apache2/vhost.d/cephalix_include.conf
+%config(noreplace) /etc/apache2/vhosts.d/cephalix_include.conf
 /usr/sbin/oss_*
 
