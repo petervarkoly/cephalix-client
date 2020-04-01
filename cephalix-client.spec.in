@@ -16,10 +16,10 @@
 #
 
 Name:           cephalix-client
-Version:	@VERSION@
-Release:	@RELEASE@
-Vendor:         Dipl.Ing. Peter Varkoly <peter@varkoly.de>
-License:	BSD-3-Clause and LGPL-2.1+ and MIT
+Version:	%_oss_version
+Vendor:		%_oss_vendor
+Release:	0
+License:	Commercial
 Summary:	Base package for a cephalix client
 Url:		http://www.cephalix.eu/
 Group:		Productivity/
