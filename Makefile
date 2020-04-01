@@ -10,6 +10,7 @@ RELEASE         = $(shell cat RELEASE )
 NRELEASE        = $(shell echo $(RELEASE) + 1 | bc )
 REQPACKAGES     = $(shell cat REQPACKAGES)
 HERE            = $(shell pwd)
+REPO            = /data1/OSC/home:varkoly:OSS-4-1:leap15.1/
 PACKAGE         = cephalix-client
 
 install:
@@ -29,14 +30,11 @@ dist:
 	tar jcpf $(PACKAGE).tar.bz2 -T files;
 	rm files
 	rm -rf $(PACKAGE)
-	if [ -d /data1/OSC/home\:varkoly\:OSS-4-0/$(PACKAGE) ] ; then \
-	    cd /data1/OSC/home\:varkoly\:OSS-4-0/$(PACKAGE); osc up; cd $(HERE);\
-	    mv $(PACKAGE).tar.bz2 /data1/OSC/home\:varkoly\:OSS-4-0/$(PACKAGE); \
-	    cd /data1/OSC/home\:varkoly\:OSS-4-0/$(PACKAGE); \
-	    osc vc; \
-	    osc ci -m "New Build Version"; \
-	fi
-	echo $(NRELEASE) > RELEASE
-	git commit -a -m "New release"
-	git push
+	if [ -d $(REPO)/$(PACKAGE) ] ; then \
+            cd $(REPO)/$(PACKAGE); osc up; cd $(HERE);\
+            mv $(PACKAGE).tar.bz2 $(REPO)/$(PACKAGE); \
+            cd $(REPO)/$(PACKAGE); \
+            osc vc; \
+            osc ci -m "New Build Version"; \
+        fi
 
