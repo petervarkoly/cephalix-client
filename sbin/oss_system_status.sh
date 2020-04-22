@@ -2,7 +2,7 @@
 
 echo -n "{"
 echo -n "\"runningKernel\":\"$( uname -r )\","
-echo -n "\"installedKernel\":\"$( rpm -q kernel-default --qf "%{VERSION}-%{RELEASE}\n" | tail -n1" )\","
+echo -n "\"installedKernel\":\"$( rpm -q kernel-default --qf "%{VERSION}-%{RELEASE}\n" | tail -n1 )\","
 echo -n "\"uptime\":\"$( gawk '{ printf("%d T %d Std",$1/86400,$1%86400/3600) }'  /proc/uptime )\","
 echo -n "\"version\":\"$( rpm -q --qf "%{VERSION}-%{RELEASE}" oss-base )\","
 d=$( rpm -qa --qf "%{INSTALLTIME}\n" | sort -n | tail  -n 1 )
