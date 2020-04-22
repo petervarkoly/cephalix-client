@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo -n "{"
+echo -n "\"created\":\"$(date +%s)000\","
 echo -n "\"runningKernel\":\"$( uname -r )\","
 echo -n "\"installedKernel\":\"$( rpm -q kernel-default --qf "%{VERSION}-%{RELEASE}\n" | tail -n1 )\","
 echo -n "\"uptime\":\"$( gawk '{ printf("%d T %d Std",$1/86400,$1%86400/3600) }'  /proc/uptime )\","
