@@ -1,5 +1,9 @@
 #!/bin/bash
 
+ERROR=""
+if [ -x /usr/share/cranix/tools/cephalix-client-check ]; then
+	ERROR=$( /usr/share/cranix/tools/cephalix-client-check )
+fi
 echo -n "{"
 echo -n "\"created\":\"$(date +%s)000\","
 echo -n "\"runningKernel\":\"$( uname -r )\","
@@ -32,6 +36,7 @@ fi
 echo -n '"availableUpdates":"'
 	zypper lu | gawk '{ if( $1 == "v" ) { printf("%s ", $5) } }'
 	echo -n '"'
+echo -n '"errorMessages":"'${ERROR}'"'
 echo "}"
 
 
