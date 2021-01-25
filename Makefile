@@ -10,7 +10,7 @@ RELEASE         = $(shell cat RELEASE )
 NRELEASE        = $(shell echo $(RELEASE) + 1 | bc )
 REQPACKAGES     = $(shell cat REQPACKAGES)
 HERE            = $(shell pwd)
-REPO            = /data1/OSC/home:varkoly:CRANIX-4-2/
+REPO            = /data1/OSC/home:varkoly:CRANIX-4-2:leap15.2/
 PACKAGE         = cephalix-client
 
 install:
