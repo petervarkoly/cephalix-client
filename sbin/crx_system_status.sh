@@ -35,7 +35,7 @@ if [ "${isHome}" ]; then
 fi
 echo -n '"availableUpdates":"'
 	zypper lu | gawk '{ if( $1 == "v" ) { printf("%s ", $5) } }'
-	echo -n '"'
+	echo '",'
 echo -n '"errorMessages":"'${ERROR}'"'
 echo "}"
 
