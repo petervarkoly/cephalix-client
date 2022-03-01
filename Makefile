@@ -1,26 +1,27 @@
 #
-# Copyright (c) 2016 Peter Varkoly Nürnberg, Germany.  All rights reserved.
+# Copyright (c) 2022 Peter Varkoly Nürnberg, Germany.  All rights reserved.
 #
 DESTDIR         = /
-SHARE           = $(DESTDIR)/usr/share/oss/
+SHARE           = $(DESTDIR)/usr/share/cranix/
 FILLUPDIR       = /usr/share/fillup-templates/
-TOPACKAGE       = Makefile etc plugins sbin
+TOPACKAGE       = Makefile etc tools sbin
 VERSION         = $(shell test -e ../VERSION && cp ../VERSION VERSION ; cat VERSION)
 RELEASE         = $(shell cat RELEASE )
 NRELEASE        = $(shell echo $(RELEASE) + 1 | bc )
-REQPACKAGES     = $(shell cat REQPACKAGES)
 HERE            = $(shell pwd)
-REPO            = /data1/OSC/home:varkoly:CRANIX-4-2:leap15.2/
+REPO            = /data1/OSC/home:pvarkoly:CRANIX
 PACKAGE         = cephalix-client
 
 install:
 	mkdir -p $(DESTDIR)/usr/sbin/
 	mkdir -p $(DESTDIR)/etc/
-	install -m 755 sbin/* $(DESTDIR)/usr/sbin/
+	mkdir -p $(SHARE)/tools/
+	install -m 755 sbin/*  $(DESTDIR)/usr/sbin/
+	install -m 755 tools/* $(SHARE)/tools/
 	rsync -a   etc/       $(DESTDIR)/etc/
-	if [ -e plugins ] ; then rsync -a plugins/ $(SHARE)/plugins/ ; fi
 
 dist:
+	xterm -e git log --raw  &
 	if [ -e $(PACKAGE) ] ;  then rm -rf $(PACKAGE) ; fi   
 	mkdir $(PACKAGE)
 	for i in $(TOPACKAGE); do \

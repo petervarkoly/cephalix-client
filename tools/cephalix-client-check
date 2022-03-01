@@ -1,0 +1,29 @@
+#!/bin/bash
+# Copyright 2022 Peter Varkoly <pvarkoly@cephalix.eu> Nuremberg
+
+if [ -x /usr/share/cranix/cephalix-client-custom-check ]; then
+	ERROR=$( /usr/share/cranix/cephalix-client-custom-check )
+fi
+
+if [ -e /etc/sysconfig/cranix ]; then
+        . /etc/sysconfig/cranix
+        if [ "$CRANIX_BACKUP" = "yes" ]; then
+                if [ "$(  tail -n 15 /var/log/cranix-backup.log | grep "CAN_NOT_MAKE_BACKUP" )" ]; then
+                        ERROR="${ERROR}#BACKUP ERROR"
+                elif  [ $(  tail -n 15 /var/log/cranix-backup.log | grep "WARNING" ) ]; then
+                        ERROR="${ERROR}#BACKUP WARNING"
+                fi
+        fi
+elif [ -e /etc/sysconfig/schoolserver ]; then
+        . /etc/sysconfig/schoolserver
+        if [ "$SCHOOL_BACKUP" = "yes" ]; then
+                if [ "$(  tail -n 15 /var/log/cranix-backup.log | grep "CAN_NOT_MAKE_BACKUP" )" ]; then
+                        ERROR="${ERROR}#BACKUP ERROR"
+                elif  [ $(  tail -n 15 /var/log/cranix-backup.log | grep "WARNING" ) ]; then
+                        ERROR="${ERROR}#BACKUP WARNING"
+                fi
+        fi
+fi
+
+echo -n "${ERROR}"
+
