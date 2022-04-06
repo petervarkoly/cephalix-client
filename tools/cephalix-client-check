@@ -9,19 +9,23 @@ if [ -e /etc/sysconfig/cranix ]; then
         . /etc/sysconfig/cranix
         if [ "$CRANIX_BACKUP" = "yes" ]; then
                 if [ "$(  tail -n 15 /var/log/cranix-backup.log | grep "CAN_NOT_MAKE_BACKUP" )" ]; then
-                        ERROR="${ERROR}#BACKUP ERROR"
+                        ERROR="${ERROR}#E BACKUP"
                 elif  [ $(  tail -n 15 /var/log/cranix-backup.log | grep "WARNING" ) ]; then
-                        ERROR="${ERROR}#BACKUP WARNING"
+                        ERROR="${ERROR}#W BACKUP"
                 fi
+	else
+		ERROR="${ERROR}#W NO_BACKUP"
         fi
 elif [ -e /etc/sysconfig/schoolserver ]; then
         . /etc/sysconfig/schoolserver
         if [ "$SCHOOL_BACKUP" = "yes" ]; then
                 if [ "$(  tail -n 15 /var/log/cranix-backup.log | grep "CAN_NOT_MAKE_BACKUP" )" ]; then
-                        ERROR="${ERROR}#BACKUP ERROR"
+                        ERROR="${ERROR}#E BACKUP"
                 elif  [ $(  tail -n 15 /var/log/cranix-backup.log | grep "WARNING" ) ]; then
-                        ERROR="${ERROR}#BACKUP WARNING"
+                        ERROR="${ERROR}#W BACKUP"
                 fi
+	else
+		ERROR="${ERROR}#W NO_BACKUP"
         fi
 fi
 
