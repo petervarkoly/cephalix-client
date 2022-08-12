@@ -34,7 +34,7 @@ if [ "${isHome}" ]; then
 	df -h --output=avail,pcent,ipcent /home | gawk '{ if ( NR==2 ) { print $1 " " $2 " " $3 "\"" ","} }'
 fi
 echo -n '"availableUpdates":"'
-	zypper lu | gawk '{ if( $1 == "v" ) { printf("%s ", $5) } }'
+	zypper lu | gawk -F "|" '{ if( $1 == "v " ) { printf("%s ", $3) } }' | sed -E 's/\s+/ /g'
 	echo '",'
 echo -n '"errorMessages":"'${ERROR}'"'
 echo "}"
